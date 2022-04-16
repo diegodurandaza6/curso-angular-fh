@@ -14,6 +14,9 @@ export class BusquedaComponent {
   constructor(private gifsService: GifsService){}
 
   buscar() {
+    if(this.txtBuscar.nativeElement.value.trim() == ''){
+      return;
+    }
     const valor = this.txtBuscar.nativeElement.value;
     this.gifsService.buscarGifs(valor);
     this.txtBuscar.nativeElement.value = '';
