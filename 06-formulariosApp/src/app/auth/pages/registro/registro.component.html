@@ -1,0 +1,90 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="submitFormulario()">
+            <!-- Nombre -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="nombre">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre del usuario" formControlName="nombre">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('nombre')">
+                        Debe de ser en formato de nombre y apellido
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="email">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" name="email" class="form-control" placeholder="Email del usuario" formControlName="email">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('email')">
+                        {{ EmailErrorMsg }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="username">Username</label>
+                <div class="col-sm-9">
+                    <input type="text" name="username" class="form-control" placeholder="Nombre código del usuario" formControlName="username">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('username')">
+                        Username en uso
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="password">Password</label>
+                <div class="col-sm-9">
+                    <input type="password" name="password" class="form-control" placeholder="Password de la cuenta" formControlName="password">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('password')">
+                        La contraseña debe ser mayor de 6 caracteres.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password confirm -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="password-confirm">Confirmar password</label>
+                <div class="col-sm-9">
+                    <input type="password" name="password-confirm" class="form-control" placeholder="Confirmar la contraseña de la cuenta" formControlName="passwordConfirm">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('passwordConfirm')">
+                        Las contraseñas deben ser iguales.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end" [disabled]="miFormulario.pending">Crear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h2>Form valid: {{ miFormulario.valid }}</h2>
+<h2>Form status: {{ miFormulario.status }}</h2>
+<h2>Form pending: {{ miFormulario.pending }}</h2>
+<h2>Form errors:</h2>
+<pre>{{ miFormulario.errors | json }}</pre>
+
+<h5>Nombre</h5>
+<pre>{{ miFormulario.controls['nombre'].errors | json }}</pre>
+
+<h5>Email</h5>
+<pre>{{ miFormulario.controls['email'].errors | json }}</pre>
+
+<h5>Username</h5>
+<pre>{{ miFormulario.controls['username'].errors | json }}</pre>
+
+<h5>Password</h5>
+<pre>{{ miFormulario.controls['password'].errors | json }}</pre>
+
+<h5>passwordConfirm</h5>
+<pre>{{ miFormulario.controls['passwordConfirm'].errors | json }}</pre>
